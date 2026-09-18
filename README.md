@@ -5,10 +5,6 @@
 
 *A full-stack robotics software project demonstrating proprietary trajectory planning, computer vision alignment, and real-time web telemetry for semiconductor wafer handling*
 
-<video src="media/waferflow_demo.mp4" width="100%" controls autoplay loop muted></video>
-
-![Simulation Screenshot](media/simulation_screenshot.png)
-
 ---
 
 [![ROS 2 Humble](https://img.shields.io/badge/ROS%202-Humble-blue?logo=ros)](https://docs.ros.org/en/humble/)
