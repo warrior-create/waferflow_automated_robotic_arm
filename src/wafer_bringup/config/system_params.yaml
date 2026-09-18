@@ -1,0 +1,28 @@
+# system_params.yaml
+# ==================
+# Global system parameters for WaferFlow
+waferflow:
+  ros__parameters:
+    # Source Cassette (A1-A5)
+    source_slots: ['A1', 'A2', 'A3', 'A4', 'A5']
+    source_x: 0.55
+    source_y: 0.0
+    source_z_base: 0.030
+    slot_pitch: 0.030
+
+    # Destination Stocker (B1-B5)
+    dest_slots: ['B1', 'B2', 'B3', 'B4', 'B5']
+    dest_x: -0.55
+    dest_y: 0.0
+    dest_z_base: 0.030
+
+    # Tolerances
+    alignment_tolerance_m: 0.002    # 2 mm
+    alignment_tolerance_rad: 0.035  # ~2 degrees
+    placement_tolerance_m: 0.001    # 1 mm
+    placement_tolerance_rad: 0.017  # ~1 degree
+    
+    # Trajectory Limits Base
+    default_velocity_scale: 1.0
+    default_acceleration_scale: 1.0
+    default_jerk_scale: 1.0

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>wafer_control</name>
+  <version>0.1.0</version>
+  <description>
+    Main state machine orchestrating WaferFlow pick-place cycles.
+    Integrates MoveIt planning, vision alignment, and custom S-curve retiming.
+  </description>
+  <maintainer email="you@example.com">WaferFlow Developer</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_python</buildtool_depend>
+
+  <depend>rclpy</depend>
+  <depend>std_msgs</depend>
+  <depend>wafer_msgs</depend>
+  <!-- <depend>moveit_py</depend> --> <!-- MoveIt Python API dependency depending on exact ROS distro version -->
+
+  <test_depend>ament_pytest</test_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>

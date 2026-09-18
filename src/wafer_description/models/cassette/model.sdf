@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+  <!--
+    Source Cassette SDF Model
+    =========================
+    5 slots (A1–A5) arranged in a single column, 30 mm pitch.
+    Slot centers at local y = [-60, -30, 0, +30, +60] mm.
+    The cassette body is a thin-walled open box — wafers rest on ledges.
+    Model origin is at the center of slot A3 (middle slot), at floor level.
+  -->
+  <model name="cassette">
+    <static>true</static>
+
+    <!-- Main body -->
+    <link name="cassette_body">
+      <pose>0 0 0.030 0 0 0</pose>
+      <visual name="body_visual">
+        <geometry>
+          <box><size>0.160 0.350 0.060</size></box>
+        </geometry>
+        <material>
+          <ambient>0.2 0.3 0.6 1.0</ambient>
+          <diffuse>0.2 0.3 0.6 1.0</diffuse>
+          <specular>0.1 0.1 0.2 0.5</specular>
+        </material>
+      </visual>
+      <collision name="body_collision">
+        <geometry>
+          <box><size>0.160 0.350 0.060</size></box>
+        </geometry>
+      </collision>
+    </link>
+
+    <!-- Slot ledge dividers (5 slots × 4 dividers) — simplified as thin boxes -->
+    <!-- Slot A1: y = -0.060 -->
+    <link name="divider_a1_top">
+      <pose>0 -0.075 0.062 0 0 0</pose>
+      <visual name="vis"><geometry><box><size>0.120 0.002 0.004</size></box></geometry>
+        <material><ambient>0.1 0.1 0.4 1</ambient></material></visual>
+    </link>
+    <!-- Slot A2: y = -0.030 -->
+    <link name="divider_a2_top">
+      <pose>0 -0.045 0.062 0 0 0</pose>
+      <visual name="vis"><geometry><box><size>0.120 0.002 0.004</size></box></geometry>
+        <material><ambient>0.1 0.1 0.4 1</ambient></material></visual>
+    </link>
+    <!-- Slot A3: y = 0.000 -->
+    <link name="divider_a3_top">
+      <pose>0 -0.015 0.062 0 0 0</pose>
+      <visual name="vis"><geometry><box><size>0.120 0.002 0.004</size></box></geometry>
+        <material><ambient>0.1 0.1 0.4 1</ambient></material></visual>
+    </link>
+    <!-- Slot A4: y = +0.030 -->
+    <link name="divider_a4_top">
+      <pose>0 0.015 0.062 0 0 0</pose>
+      <visual name="vis"><geometry><box><size>0.120 0.002 0.004</size></box></geometry>
+        <material><ambient>0.1 0.1 0.4 1</ambient></material></visual>
+    </link>
+    <!-- Slot A5: y = +0.060 -->
+    <link name="divider_a5_top">
+      <pose>0 0.045 0.062 0 0 0</pose>
+      <visual name="vis"><geometry><box><size>0.120 0.002 0.004</size></box></geometry>
+        <material><ambient>0.1 0.1 0.4 1</ambient></material></visual>
+    </link>
+    <link name="divider_bottom">
+      <pose>0 0.075 0.062 0 0 0</pose>
+      <visual name="vis"><geometry><box><size>0.120 0.002 0.004</size></box></geometry>
+        <material><ambient>0.1 0.1 0.4 1</ambient></material></visual>
+    </link>
+
+  </model>
+</sdf>

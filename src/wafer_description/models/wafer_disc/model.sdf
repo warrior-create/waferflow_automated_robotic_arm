@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+  <!--
+    Wafer Disc SDF Model
+    ====================
+    100 mm diameter, 2 mm thick — matches real 100mm (4") semiconductor wafer.
+    Weight ~15g for silicon (density ≈ 2330 kg/m³).
+    Color: silicon grey with slight metallic sheen.
+    
+    NOTE: Wafers are spawned with small random position/rotation offsets
+    by the spawn_wafers.py launch helper in wafer_bringup to simulate
+    cassette loading imprecision.
+  -->
+  <model name="wafer_disc">
+    <link name="wafer_link">
+      <pose>0 0 0.001 0 0 0</pose>
+
+      <inertial>
+        <mass>0.015</mass>
+        <!-- Thin solid cylinder: I_xx = I_yy = m(3r² + h²)/12, I_zz = mr²/2 -->
+        <inertia>
+          <ixx>0.0000094</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.0000094</iyy>
+          <iyz>0</iyz>
+          <izz>0.0000188</izz>
+        </inertia>
+      </inertial>
+
+      <collision name="wafer_collision">
+        <geometry>
+          <cylinder>
+            <radius>0.050</radius>
+            <length>0.002</length>
+          </cylinder>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.8</mu>
+              <mu2>0.6</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1e6</kp>
+              <kd>1.0</kd>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+
+      <visual name="wafer_visual">
+        <geometry>
+          <cylinder>
+            <radius>0.050</radius>
+            <length>0.002</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.55 0.55 0.60 0.95</ambient>
+          <diffuse>0.55 0.55 0.65 0.95</diffuse>
+          <specular>0.8 0.8 0.9 0.8</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+
+      <!-- Notch marker (small box) for rotation reference — like real wafer flat/notch -->
+      <visual name="notch_visual">
+        <pose>0.048 0 0.001 0 0 0</pose>
+        <geometry>
+          <box><size>0.003 0.008 0.002</size></box>
+        </geometry>
+        <material>
+          <ambient>0.1 0.1 0.1 1</ambient>
+          <diffuse>0.1 0.1 0.1 1</diffuse>
+        </material>
+      </visual>
+
+    </link>
+  </model>
+</sdf>

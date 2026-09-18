@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<!--
+  WaferFlow SCARA Arm — Semantic Robot Description Format (SRDF)
+  ==============================================================
+  Defines planning groups, end-effectors, virtual joints, and
+  disabled collision pairs for MoveIt2.
+
+  TODO (Phase 3 — MoveIt baseline):
+    After running MoveIt Setup Assistant on scara_arm.xacro, replace this
+    placeholder with the generated SRDF. The planning group name "scara_arm"
+    and end-effector "vacuum_ee" should be preserved.
+-->
+<robot name="scara_arm">
+
+  <!-- Virtual joint connecting world to base_link -->
+  <virtual_joint name="virtual_joint"
+                 type="fixed"
+                 parent_frame="world"
+                 child_link="base_link"/>
+
+  <!-- ── Planning Groups ──────────────────────────────────────────── -->
+  <!--
+    Main 4-DOF planning group. MoveIt will plan for all 4 joints together.
+    Using joint model group (not IK-chain) since SCARA kinematics
+    are simple and we control joint space directly.
+  -->
+  <group name="scara_arm">
+    <joint name="joint_1"/>
+    <joint name="joint_2"/>
+    <joint name="joint_3"/>
+    <joint name="joint_z"/>
+  </group>
+
+  <!-- ── End Effectors ────────────────────────────────────────────── -->
+  <end_effector name="vacuum_ee"
+                parent_link="ee_base"
+                group="scara_arm"
+                parent_group="scara_arm"/>
+
+  <!-- ── Named States (home position) ────────────────────────────── -->
+  <group_state name="home" group="scara_arm">
+    <joint name="joint_1" value="0"/>
+    <joint name="joint_2" value="0"/>
+    <joint name="joint_3" value="0"/>
+    <joint name="joint_z" value="0.15"/>
+  </group_state>
+
+  <!-- Pre-pick approach pose above cassette slot A1 -->
+  <group_state name="approach_cassette" group="scara_arm">
+    <joint name="joint_1" value="0.0"/>
+    <joint name="joint_2" value="0.4"/>
+    <joint name="joint_3" value="-0.4"/>
+    <joint name="joint_z" value="0.25"/>
+  </group_state>
+
+  <!-- Pre-place approach pose above stocker slot B1 -->
+  <group_state name="approach_stocker" group="scara_arm">
+    <joint name="joint_1" value="3.14159"/>
+    <joint name="joint_2" value="0.4"/>
+    <joint name="joint_3" value="-0.4"/>
+    <joint name="joint_z" value="0.25"/>
+  </group_state>
+
+  <!-- ── Disabled Collision Pairs ─────────────────────────────────── -->
+  <!--
+    Disable self-collision between adjacent links (they never collide by design).
+    TODO: Generate full list from MoveIt Setup Assistant's collision matrix.
+  -->
+  <disable_collisions link1="base_link"  link2="z_carriage" reason="Adjacent"/>
+  <disable_collisions link1="z_carriage" link2="link_1"     reason="Adjacent"/>
+  <disable_collisions link1="link_1"     link2="link_2"     reason="Adjacent"/>
+  <disable_collisions link1="link_2"     link2="ee_base"    reason="Adjacent"/>
+  <disable_collisions link1="ee_base"    link2="ee_stem"    reason="Adjacent"/>
+  <disable_collisions link1="ee_stem"    link2="ee_pad"     reason="Adjacent"/>
+  <disable_collisions link1="base_link"  link2="link_1"     reason="Never"/>
+  <disable_collisions link1="base_link"  link2="link_2"     reason="Never"/>
+  <disable_collisions link1="z_carriage" link2="link_2"     reason="Never"/>
+  <disable_collisions link1="link_1"     link2="ee_base"    reason="Never"/>
+
+</robot>

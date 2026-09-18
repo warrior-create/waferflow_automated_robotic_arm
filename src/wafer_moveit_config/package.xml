@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>wafer_moveit_config</name>
+  <version>0.1.0</version>
+  <description>
+    MoveIt2 configuration for the WaferFlow SCARA arm.
+    Includes SRDF, kinematics, joint limits, OMPL planning, and controller config.
+    TODO (Phase 3): Run MoveIt Setup Assistant and replace placeholder SRDF.
+  </description>
+  <maintainer email="you@example.com">WaferFlow Developer</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <exec_depend>moveit_ros_move_group</exec_depend>
+  <exec_depend>moveit_kinematics</exec_depend>
+  <exec_depend>moveit_planners_ompl</exec_depend>
+  <exec_depend>moveit_ros_visualization</exec_depend>
+  <exec_depend>wafer_description</exec_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

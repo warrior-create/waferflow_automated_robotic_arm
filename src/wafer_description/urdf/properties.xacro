@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="waferflow_properties">
+  <!--
+    Properties (parameters) for the WaferFlow SCARA arm.
+    Edit these to change geometry without touching the main URDF files.
+  -->
+
+  <!-- ── Link dimensions ─────────────────────────────────────────── -->
+  <xacro:property name="base_radius"      value="0.075"/>   <!-- m -->
+  <xacro:property name="base_height"      value="0.080"/>
+  <xacro:property name="link1_length"     value="0.300"/>   <!-- shoulder–elbow -->
+  <xacro:property name="link1_radius"     value="0.025"/>
+  <xacro:property name="link2_length"     value="0.250"/>   <!-- elbow–wrist -->
+  <xacro:property name="link2_radius"     value="0.022"/>
+  <xacro:property name="ee_radius"        value="0.055"/>   <!-- vacuum pad radius -->
+  <xacro:property name="ee_thickness"     value="0.010"/>
+  <xacro:property name="z_column_height"  value="0.400"/>   <!-- prismatic stroke -->
+  <xacro:property name="z_column_radius"  value="0.030"/>
+
+  <!-- ── Wafer disc (100 mm diameter, 2 mm thick) ─────────────────── -->
+  <xacro:property name="wafer_radius"     value="0.050"/>   <!-- 100 mm dia -->
+  <xacro:property name="wafer_thickness"  value="0.002"/>
+
+  <!-- ── Joint limits ─────────────────────────────────────────────── -->
+  <!-- Joint 1: base rotation (full 360 allowed in sim) -->
+  <xacro:property name="j1_lower"   value="-3.14159"/>
+  <xacro:property name="j1_upper"   value=" 3.14159"/>
+  <xacro:property name="j1_vel"     value="3.0"/>           <!-- rad/s -->
+  <xacro:property name="j1_effort"  value="50.0"/>
+
+  <!-- Joint 2: elbow rotation -->
+  <xacro:property name="j2_lower"   value="-2.35619"/>      <!-- -135 deg -->
+  <xacro:property name="j2_upper"   value=" 2.35619"/>
+  <xacro:property name="j2_vel"     value="3.0"/>
+  <xacro:property name="j2_effort"  value="30.0"/>
+
+  <!-- Joint 3: end-effector rotation (wrist) -->
+  <xacro:property name="j3_lower"   value="-3.14159"/>
+  <xacro:property name="j3_upper"   value=" 3.14159"/>
+  <xacro:property name="j3_vel"     value="6.0"/>
+  <xacro:property name="j3_effort"  value="10.0"/>
+
+  <!-- Joint 4: prismatic Z lift -->
+  <xacro:property name="j4_lower"   value="0.0"/>
+  <xacro:property name="j4_upper"   value="0.35"/>           <!-- 350 mm stroke -->
+  <xacro:property name="j4_vel"     value="0.3"/>            <!-- m/s -->
+  <xacro:property name="j4_effort"  value="100.0"/>
+
+  <!-- ── Material colors ───────────────────────────────────────────── -->
+  <material name="dark_aluminium">
+    <color rgba="0.25 0.25 0.28 1.0"/>
+  </material>
+  <material name="light_aluminium">
+    <color rgba="0.75 0.75 0.78 1.0"/>
+  </material>
+  <material name="wafer_grey">
+    <color rgba="0.55 0.55 0.60 0.9"/>
+  </material>
+  <material name="vacuum_pad_black">
+    <color rgba="0.10 0.10 0.10 1.0"/>
+  </material>
+  <material name="cassette_blue">
+    <color rgba="0.20 0.30 0.60 1.0"/>
+  </material>
+  <material name="stocker_green">
+    <color rgba="0.15 0.50 0.25 1.0"/>
+  </material>
+
+</robot>

@@ -1,0 +1,10 @@
+# AlignWafer.srv
+# Request: identify which source slot to inspect.
+# Response: the detected wafer pose offset + confidence.
+# The wafer_control FSM calls this before every PICK to get pre-alignment correction.
+
+string slot_id          # e.g. "A1", "A2" … "A5"
+---
+wafer_msgs/WaferPose pose
+bool   detected         # false if no wafer found in slot
+string message          # human-readable status / error description

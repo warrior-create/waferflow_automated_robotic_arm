@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>wafer_benchmark</name>
+  <version>0.1.0</version>
+  <description>
+    WaferFlow benchmark harness. Runs pick-place cycle sweeps over varying
+    cycle times, logs metrics to CSV, and generates Pareto tradeoff plots.
+  </description>
+  <maintainer email="you@example.com">WaferFlow Developer</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_python</buildtool_depend>
+
+  <depend>rclpy</depend>
+  <depend>std_msgs</depend>
+  <depend>wafer_msgs</depend>
+
+  <test_depend>ament_pytest</test_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>

@@ -1,0 +1,18 @@
+# ROS2
+build/
+install/
+log/
+
+# Python
+__pycache__/
+*.pyc
+
+# IDEs
+.vscode/
+.idea/
+
+# Results
+docs/results/*.csv
+docs/results/*.png
+src/wafer_benchmark/results/*.csv
+src/wafer_benchmark/results/*.png

@@ -1,0 +1,24 @@
+# GenerateTrajectory.action
+# Goal: geometric path (joint waypoints) + desired cycle time.
+# Result: time-stamped JointTrajectory using S-curve profile.
+# Feedback: progress percentage during generation.
+
+# --- GOAL ---
+string[] joint_names                        # ordered list of joint names
+float64[] waypoints_flat                    # flattened Nx6 matrix (N waypoints × DOF)
+int32 num_waypoints
+float64 target_cycle_time                   # desired total execution time [seconds]
+float64 max_velocity_scale                  # 0.0–1.0 fraction of joint velocity limits
+float64 max_acceleration_scale             # 0.0–1.0 fraction of joint accel limits
+float64 max_jerk_scale                     # 0.0–1.0 fraction of joint jerk limits
+---
+# --- RESULT ---
+trajectory_msgs/JointTrajectory trajectory  # timestamped output trajectory
+float64 actual_cycle_time                   # actual achievable time (may > target if limits hit)
+float64 peak_jerk                           # max joint-space jerk norm [rad/s³]
+bool    feasible                            # false if limits violated and trajectory clamped
+string  message
+---
+# --- FEEDBACK ---
+float64 progress_percent                    # 0–100 during planning
+string  current_phase                       # e.g. "COMPUTING_SCURVE", "RETIMING"

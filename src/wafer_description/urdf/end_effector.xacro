@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <!--
+    End Effector Xacro — vacuum pad style
+    Visual only: a flat disc (pad) + thin cylindrical stem connecting to ee_base.
+    No physics grasp modelled — wafer attachment is handled logically in wafer_control.
+  -->
+
+
+
+  <xacro:macro name="vacuum_pad" params="parent prefix">
+
+    <!-- Fixed joint: ee_base → vacuum pad stem -->
+    <joint name="${prefix}ee_stem_joint" type="fixed">
+      <parent link="${parent}"/>
+      <child  link="${prefix}ee_stem"/>
+      <origin xyz="0 0 -0.030" rpy="0 0 0"/>
+    </joint>
+
+    <link name="${prefix}ee_stem">
+      <visual>
+        <origin xyz="0 0 -0.015" rpy="0 0 0"/>
+        <geometry><cylinder radius="0.010" length="0.030"/></geometry>
+        <material name="dark_aluminium"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 -0.015" rpy="0 0 0"/>
+        <geometry><cylinder radius="0.010" length="0.030"/></geometry>
+      </collision>
+      <inertial>
+        <mass value="0.05"/>
+        <inertia ixx="0.000002" ixy="0" ixz="0" iyy="0.000002" iyz="0" izz="0.000001"/>
+      </inertial>
+    </link>
+
+    <!-- Fixed joint: stem → vacuum pad disc -->
+    <joint name="${prefix}ee_pad_joint" type="fixed">
+      <parent link="${prefix}ee_stem"/>
+      <child  link="${prefix}ee_pad"/>
+      <origin xyz="0 0 -0.030" rpy="0 0 0"/>
+    </joint>
+
+    <link name="${prefix}ee_pad">
+      <visual>
+        <origin xyz="0 0 -${ee_thickness/2}" rpy="0 0 0"/>
+        <geometry><cylinder radius="${ee_radius}" length="${ee_thickness}"/></geometry>
+        <material name="vacuum_pad_black"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 -${ee_thickness/2}" rpy="0 0 0"/>
+        <geometry><cylinder radius="${ee_radius}" length="${ee_thickness}"/></geometry>
+      </collision>
+      <inertial>
+        <mass value="0.10"/>
+        <inertia ixx="0.00007" ixy="0" ixz="0" iyy="0.00007" iyz="0" izz="0.00014"/>
+      </inertial>
+    </link>
+
+  </xacro:macro>
+
+</robot>

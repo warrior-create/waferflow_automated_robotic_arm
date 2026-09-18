@@ -1,0 +1,53 @@
+# moveit_controllers.yaml
+# ========================
+# Maps MoveIt2 planning groups to ros2_control controller instances.
+# The trajectory execution manager (TEM) uses this to dispatch trajectories
+# to the right hardware interface.
+
+moveit_controller_manager: moveit_simple_controller_manager/MoveItSimpleControllerManager
+
+moveit_simple_controller_manager:
+  controller_names:
+    - scara_arm_controller
+
+  scara_arm_controller:
+    type: FollowJointTrajectory
+    action_ns: follow_joint_trajectory
+    default: true
+    joints:
+      - joint_1
+      - joint_2
+      - joint_3
+      - joint_z
+
+# ros2_control controller spawner config (used by bringup launch files)
+controller_manager:
+  ros__parameters:
+    update_rate: 1000  # Hz
+
+    scara_arm_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+scara_arm_controller:
+  ros__parameters:
+    joints:
+      - joint_1
+      - joint_2
+      - joint_3
+      - joint_z
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+    state_publish_rate: 100.0
+    action_monitor_rate: 20.0
+    allow_partial_joints_goal: false
+    open_loop_control: true
+    allow_integration_in_goal_trajectories: true
+    constraints:
+      stopped_velocity_tolerance: 0.01
+      goal_time: 0.0
